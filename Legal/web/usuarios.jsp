@@ -33,7 +33,7 @@
 			  					<div class="panel-title">Mantenedor de Usuarios</div>
 								
 								<div class="panel-options">
-                                                                    <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#nuevoUsr">
+                                                                    <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModalNorm">
                                                                         Agregar
                                                                     </button>
                                                                     <!--<input type="button" value="Agregar" class="btn btn-xs btn-primary" data-toggle="modal" data-target="nuevoUsr" />-->
@@ -111,44 +111,90 @@
      
      
      
-     <div class="modal fade" id="nuevoUsr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
-        
-      </div>
-      <div class="modal-body">
-        
-          <form>
-              
-                  <div class="col-md-6">
-                      <input type="tex" name="txbRut" class="form-control" placeholder="Rut" /> 
-                      
-                  </div>
-                  <div class="col-md-6">
-                  <input type="tex" name="txbNombre" class="form-control" placeholder="Nombre" />
-                  </div>
+<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Nuevo Usuario
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-5">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Rut" />
+                        </div>
+                        <div class="col-md-5 col-md-offset-0">
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nombre" />
+                       </div> 
+                    </div><br>
+                    
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Apellido" />
+                        </div>
+                        <div class="col-md-5">
+                            <input type="email" class="form-control"id="exampleInputPassword1" placeholder="Correo"/>
+                        </div>
+                    </div><br>
+                    
+                     <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Telefono" />
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control"id="exampleInputPassword1" placeholder="Nombre de Usuario"/>
+                        </div>
+                     </div> <br>
+                    
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="Clave" />
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control">
+                                <option value="0">(Perfil)</option>
+                            </select>
+<!--                            <input type="text" class="form-control"id="exampleInputPassword1" placeholder="Usuario"/>-->
+                        </div>
+                    </div>
+                    
+                    
                   
-                  <div class="col-md-6">
-                  <input type="tex" name="txbApell" class="form-control" placeholder="Apellido" />
-                  </div>
                    
-                  <div class="col-md-6"> 
-                  <input type="tex" name="txbEmail" class="form-control" placeholder="Correo" />
-                  </div>
+                  
+                   
+                    
+                    
+                    
+<!--                  <button type="submit" class="btn btn-success">Submit</button>-->
+               
+               
+               
+                
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-success">Crear</button> 
+            </div>
+            
+             </form>
+                    
            
-             
-          </form>
-          
-          
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-success">Crear Usuario</button>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
      
      
