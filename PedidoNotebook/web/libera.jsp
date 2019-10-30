@@ -49,7 +49,6 @@
                                         <td><fmt:formatDate pattern="dd-MM-yyyy" value="${pres.getFechaPedido()}"/></td>
                                         <form method="post" action="./listaPrestamo">
                                             <input type="hidden" name="idPrestamo" value="${pres.getId()}" />
-                                            <input type="hidden" name="fechaEntrega" value="<% out.print(fecha); %>" />
                                             <input type="hidden" name="nomEquipo" value="${pres.getEquipo()}" />
                                             <td> <input type="submit" value="Finalizar" class="btn btn-danger btn-sm" /> </td>
                                         </form>

@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -16,11 +16,11 @@
             
           <script>
              $( function() {
-              $( "#fecha" ).datepicker({monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],dayNames:["Lunes","Martes","Miercoles","Jueves","Viernes","S√°bado","Domingo"],dayNamesMin:["do","lu","ma","mi","ju","vi","s√°"],dateFormat:"dd-m-yy" });
+              $( "#fecha" ).datepicker({monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],dayNames:["Lunes","Martes","Miercoles","Jueves","Viernes","S·bado","Domingo"],dayNamesMin:["do","lu","ma","mi","ju","vi","s·"],dateFormat:"dd-m-yy" });
             } );
           </script> 
         
-        <title>Notebook de Pr√©stamo</title>
+        <title>Notebook de PrÈstamo</title>
     </head>
     <body>
         <jsp:include page="./registra" flush="true"/>
@@ -93,7 +93,7 @@
                     <br> <br>
                     
                     <fieldset>
-                        <legend>Equipos en Pr√©stamo</legend>
+                        <legend>Equipos en PrÈstamo</legend>
                         
                         <table class="table">
                             <thead>
@@ -127,7 +127,7 @@
         </section>          
       
         
-       
+<!--        <button onclick="location.href='./EnvMail'">Mail</button>-->
        
           
             

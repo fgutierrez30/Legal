@@ -100,4 +100,41 @@ public class PrestamoDAO {
             
         }
     }
+    
+    
+     public PrestamoDTO pedidoXID(int id)
+    {
+        PrestamoDTO prestamo=new PrestamoDTO();
+        
+        try{
+        
+           String select="SELECT usuario,equipo FROM prestamo_notebook WHERE id_prestamo=?";
+           PreparedStatement ps=null;
+           Conexion con=new Conexion();
+           Connection dbCon=con.conectarMySQL();
+           ps=dbCon.prepareStatement(select);
+           ps.setInt(1, id);
+           ResultSet rs=ps.executeQuery();
+           
+           
+           while(rs.next())
+           {
+               String nom=rs.getString("usuario");
+               String eq=rs.getString("equipo");
+               
+               prestamo.setUsr(nom);
+               prestamo.setEquipo(eq);
+               
+           }
+           
+           
+        }catch(Exception ex)
+        {
+            
+        }
+                        
+        return prestamo;
+    }
+    
+    
 }

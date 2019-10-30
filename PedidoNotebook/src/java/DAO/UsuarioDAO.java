@@ -10,6 +10,7 @@ import DTO.UsuarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,5 +49,40 @@ public class UsuarioDAO {
         
         return lista;
     }
+    
+    public String buscarCorreo(String nombre, String apellido)
+    {
+        String mail="";
+        try
+        {
+            String select="SELECT Correo FROM usuarios WHERE Estado=0 and Nombres=? and ApellidoPat=?";
+            PreparedStatement ps=null;
+            Conexion con=new Conexion();
+            Connection dbCon=con.conectarMySQL();
+            ps=dbCon.prepareStatement(select);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            
+            
+            
+            ResultSet rs=ps.executeQuery();
+
+            if(rs.next())
+            {
+                mail=rs.getString("Correo");
+                              
+            }
+            
+        }catch(Exception ex)
+        {
+            
+        }
+        
+        return mail;
+        
+    }
+    
+    
+      
     
 }

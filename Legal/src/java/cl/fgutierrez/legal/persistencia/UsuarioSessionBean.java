@@ -29,4 +29,10 @@ public class UsuarioSessionBean {
         return lista;
     }
     
+    
+    public void addUsuario(Usuario usr)
+    {
+        em.persist(usr);
+    }
+    
 }

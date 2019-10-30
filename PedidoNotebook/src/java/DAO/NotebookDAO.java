@@ -7,6 +7,7 @@ package DAO;
 
 import DTO.Conexion;
 import DTO.NotebookDTO;
+import DTO.PrestamoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,5 +97,7 @@ public class NotebookDAO {
         }
         
     }
+    
+   
     
 }

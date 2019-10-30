@@ -5,16 +5,14 @@
  */
 package COTROLADOR;
 
+import DAO.MailDAO;
 import DAO.NotebookDAO;
 import DAO.PrestamoDAO;
+import DAO.UsuarioDAO;
 import DTO.PrestamoDTO;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,22 +45,48 @@ public class PrestamoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String fechaS=request.getParameter("fechaEntrega");
+        
         String equipo=request.getParameter("nomEquipo");
-        try {
-            Date fecha=new SimpleDateFormat("dd-MM-yy").parse(fechaS);
+        
+            
+            java.sql.Date fechaSql=new java.sql.Date(Calendar.getInstance().getTime().getTime());
             int id=Integer.parseInt(request.getParameter("idPrestamo"));
             PrestamoDAO finPrestamo=new PrestamoDAO();
-            finPrestamo.finPrestamo(id, fecha);
+            finPrestamo.finPrestamo(id, fechaSql);
             NotebookDAO devolucion=new NotebookDAO();
             devolucion.liberaEquipo(equipo);
+            
+            PrestamoDTO prestamo= finPrestamo.pedidoXID(id);
+            String[]nombre= prestamo.getUsr().split(" ");
+            String nombreFinal="";
+            String apellido="";
+            
+            if(nombre.length==2)
+            {
+                nombreFinal=nombre[0];
+                apellido=nombre[1];
+            }else if(nombre.length==3)
+            {
+                nombreFinal=nombre[0]+" "+nombre[1];
+                apellido=nombre[2];
+                
+            }
+            
+            UsuarioDAO usr=new UsuarioDAO();
+            
+            String destinatario=usr.buscarCorreo(nombreFinal, apellido);
+            String asunto="Devolucion Notebook";
+            String cuerpo="Estimado "+prestamo.getUsr()+",\n Confirmamos devolucion del equipo "+prestamo.getEquipo()+" con fecha "+fechaSql;
+            
+            
+            MailDAO mail=new MailDAO();
+            mail.enviarConGMail(destinatario, asunto, cuerpo);
+            
             
             response.sendRedirect("libera.jsp");
             
             
-        } catch (ParseException ex) {
-            Logger.getLogger(PrestamoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
     }
 

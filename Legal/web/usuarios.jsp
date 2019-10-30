@@ -77,7 +77,7 @@
                                                                             </c:choose>
                                                                         </td>
                                                                         
-                                                                        <td><input type="button" value="Editar" class="btn btn-xs btn-danger" /></td>
+                                                                        <td><input type="button" value="Editar" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#view-modal" id="getUsr" data-id="${usr.idUsr}" /></td>
                                                                     </tr>
                                                                     </c:forEach>
                                                                 </tbody>
@@ -130,41 +130,43 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                <form role="form">
+                <form role="form" method="post" action="./usr">
                     <div class="row">
                         <div class="col-md-5">
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Rut" />
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Rut" name="txbRut" />
                         </div>
                         <div class="col-md-5 col-md-offset-0">
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nombre" />
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="txbNombre" placeholder="Nombre" />
                        </div> 
                     </div><br>
                     
                     <div class="row">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Apellido" />
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="txbApell" placeholder="Apellido" />
                         </div>
                         <div class="col-md-5">
-                            <input type="email" class="form-control"id="exampleInputPassword1" placeholder="Correo"/>
+                            <input type="email" class="form-control"id="exampleInputPassword1" name="txbCorreo" placeholder="Correo"/>
                         </div>
                     </div><br>
                     
                      <div class="row">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Telefono" />
+                            <input type="text" name="txbFono" class="form-control" id="exampleInputEmail1" placeholder="Telefono" />
                         </div>
                         <div class="col-md-5">
-                            <input type="text" class="form-control"id="exampleInputPassword1" placeholder="Nombre de Usuario"/>
+                            <input type="text" name="txbNomUsr" class="form-control"id="exampleInputPassword1" placeholder="Nombre de Usuario"/>
                         </div>
                      </div> <br>
                     
                     <div class="row">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="Clave" />
+                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="Clave" name="txbClave" />
                         </div>
                         <div class="col-md-5">
-                            <select class="form-control">
+                            <select class="form-control" name="cmbPerfil">
                                 <option value="0">(Perfil)</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Usuario</option>
                             </select>
 <!--                            <input type="text" class="form-control"id="exampleInputPassword1" placeholder="Usuario"/>-->
                         </div>
@@ -197,8 +199,73 @@
     </div>
 </div>
      
+
+<!--MODAL PARA EDITAR  ***********************   -->
      
+    <div id="view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog"> 
+     <div class="modal-content">  
+   
+        <div class="modal-header"> 
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+           <h4 class="modal-title">
+           <i class="glyphicon glyphicon-user"></i> Modificar Usuario
+           </h4> 
+        </div> 
+            
+        <div class="modal-body">                     
+           <div id="modal-loader" style="display: none; text-align: center;">
+               
+              
+               
+               
+               <!-- ajax loader -->
+           <img src="ajax-loader.gif">
+           </div>
+                            
+           <!-- mysql data will be load here -->                          
+           <div id="dynamic-content"></div>
+        </div> 
+        
+                        
+    </div> 
+  </div>
+</div>          
      
+  <script>
+$(document).ready(function(){
+	
+	$(document).on('click', '#getUsr', function(e){
+		
+		e.preventDefault();
+		
+		var uid = $(this).data('id');   // it will get id of clicked row
+		
+		$('#dynamic-content').html(''); // leave it blank before ajax call
+		$('#modal-loader').show();      // load ajax loader
+		
+		$.ajax({
+			url: './actUst',
+			type: 'GET',
+			data: 'id_usr='+uid,
+			dataType: 'html'
+		})
+		.done(function(data){
+			console.log(data);	
+			$('#dynamic-content').html('');    
+			$('#dynamic-content').html(data); // load response 
+			$('#modal-loader').hide();		  // hide ajax loader	
+		})
+		.fail(function(){
+			$('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
+			$('#modal-loader').hide();
+		});
+		
+	});
+	
+});
+
+</script>   
      
      
      
